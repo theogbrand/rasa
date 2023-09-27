@@ -1,0 +1,102 @@
+version: '3.1'
+intents:
+- EXTERNAL_dry_plant
+- EXTERNAL_reminder
+- EXT_reminder
+- affirm
+- ask_forget_reminders
+- ask_id
+- ask_me_anything
+- ask_remind_call
+- bot_challenge
+- deny
+- faq:
+    used_entities:
+    - PERSON
+    - plant
+    - shirt_size
+    is_retrieval_intent: true
+- give_shirt_size
+- give_time
+- goodbye
+- greet
+- mood_great
+- mood_unhappy
+- repeat_shirt_size
+entities:
+- plant
+- shirt_size
+- PERSON
+slots:
+  shirt_size:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: shirt_size
+      conditions:
+      - active_loop: shirt_size_form
+  plant:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: plant
+  PERSON:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: PERSON
+forms:
+  shirt_size_form:
+    required_slots:
+    - shirt_size
+actions:
+- utter_welcome
+- utter_classes_info_1
+- utter_classes_info_3
+- utter_classes_info_2
+- action_warn_dry
+- action_tell_id
+- action_say_shirt_size
+- utter_remember
+- utter_greet
+- action_default_fallback
+- action_set_reminder
+- action_forget_reminders
+- action_react_to_reminder
+- utter_faq
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_ask_shirt_size:
+  - text: do u know ur shirt size?
+  utter_remember:
+  - text: terimah kasih. I'll remember ur size.
+  utter_message:
+  - text: '{message}'
+  utter_warn_dry:
+  - text: Your {plant} needs some water!
+  utter_welcome:
+  - text: welcome! would you like to try our classes?
+  utter_classes_info_1:
+  - text: we have classes for math and science, for ages between 5 and 18. would you like to find out more about our classes?
+  utter_classes_info_2:
+  - text: for math we cover topics like Geometry and Calculus. For Science, we cover physics and biology, want to find out more about our pricing?
+  utter_classes_info_3:
+  - text: we offer three pricing packages with money back guarantee. Would you like to try our 1 month trial at a discount?
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

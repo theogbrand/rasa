@@ -1,0 +1,58 @@
+version: '3.1'
+
+stories:
+  # - story: Happy path
+  #   steps:
+  #     - intent: greet
+  #     - intent: ask_remind_call
+  #     - action: action_set_reminder
+
+  - story: interactive_story_1
+    steps:
+      - intent: ask_me_anything
+      - action: shirt_size_form
+      - active_loop: shirt_size_form
+      - slot_was_set:
+          - requested_slot: shirt_size
+      - intent: give_shirt_size
+        entities:
+          - shirt_size: medium
+      - slot_was_set:
+          - shirt_size: medium
+      - action: shirt_size_form
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_remember
+      - action: action_say_shirt_size
+  - story: interactive_story_1
+    steps:
+      - intent: ask_id
+      - action: action_tell_id
+      - intent: EXTERNAL_dry_plant
+        entities:
+          - plant: Orchid
+      - slot_was_set:
+          - plant: Orchid
+      - action: action_warn_dry
+
+# most common, send hello and acknowledge want to know more about classes
+  - story: welcome user and nurture lead flow
+    steps:
+    - intent: greet
+    - action: utter_welcome
+    - intent: affirm
+    - action: utter_classes_info_1
+    - intent: affirm
+    - action: utter_classes_info_2
+    - intent: affirm
+    - action: utter_classes_info_3
+
+  - story: interactive_story_1
+    steps:
+    - intent: greet
+    - action: utter_welcome
+    - intent: affirm
+    - action: utter_classes_info_1
+    - intent: faq
+    - action: action_default_fallback
