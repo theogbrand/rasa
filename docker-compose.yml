@@ -1,17 +1,18 @@
 version: '3.0'
 services:
   rasa:
-    image: rasa/rasa:2.8.34-full
+    container_name: rasa-core
+    image: rasa/rasa:3.6.10-full
     ports:
       - 5005:5005
     volumes:
       - ./:/app
-    command:
+    entrypoint:
+      - rasa
       - run
+      - --enable-api
     networks:
       - chat-network
-    depends_on:
-      - rasa-actions
   rasa-actions:
     build:
       dockerfile: ./actions/Dockerfile
@@ -20,7 +21,6 @@ services:
       - 5055:5055
     networks:
       - chat-network
-
 networks:
   chat-network:
     driver: bridge

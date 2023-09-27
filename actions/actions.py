@@ -35,7 +35,7 @@ class ActionDefaultFallback(Action):
         # def get_chatgpt_response(self, message):
         url = "https://api.openai.com/v1/chat/completions"
         headers = {
-            "Authorization": "Bearer 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",
+            "Authorization": "Bearer <API_KEY>",
             "Content-Type": "application/json",
         }
         data = {
