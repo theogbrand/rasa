@@ -1,5 +1,6 @@
 venv
-models
+.config
+.keras
 .rasa
 __pycache__
 .vscode
