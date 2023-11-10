@@ -1,3 +1,9 @@
+# run workflow
+```shell
+docker compose up --build
+docker compose down
+```
+
 ```shell
 rasa run actions
 rasa interactive
